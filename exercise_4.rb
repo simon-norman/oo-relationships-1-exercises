@@ -22,6 +22,16 @@ class AdvanceScrambler
     @steps = steps
   end
 
+  def scramble(text)
+    scramble_or_unscramble_using_block(text) { |char| (char.ord + @steps).chr }
+  end
+
+  def unscramble(text)
+    scramble_or_unscramble_using_block(text) { |char| (char.ord - @steps).chr }
+  end
+
+  private
+  
   def scramble_or_unscramble_using_block(text)
     chars = text.chars
     scrambled_or_unscrambled_chars = chars.map do |char|
@@ -29,14 +39,6 @@ class AdvanceScrambler
     end
 
     scrambled_or_unscrambled_chars.join
-  end
-
-  def scramble(text)
-    scramble_or_unscramble_using_block(text) { |char| (char.ord + @steps).chr }
-  end
-
-  def unscramble(text)
-    scramble_or_unscramble_using_block(text) { |char| (char.ord - @steps).chr }
   end
 end
 
